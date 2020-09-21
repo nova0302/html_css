@@ -178,7 +178,7 @@
    - *property*
 
 *** p {text-align : center;}
-*** selector : 
+*** [[https://www.w3schools.com/cssref/css_selectors.asp][selectors]] 
 **** simple selector( name, . class selector, # id selector)
      
 **** Combinator selectors (select elements based on a specific relationship between them)
@@ -230,6 +230,7 @@ begins with "top"
     - color
     - width, height
     - border : px, solid, #ff0000
+    - border-bottom : 1px solid #ff0000
     - background-color
     - text-align
     - font-weight
@@ -237,10 +238,20 @@ begins with "top"
     - padding
     - underline
     - text-decoration : underline
+    - list-style : none
       
 *** margin
     - margin : 0 0 0 0
     - margin : 0 auto
+      
+#+BEGIN_SRC css3
+p {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+#+END_SRC
       
 *** clear : both
     - Do not allow floating elements on the left or the right side of a specified <p> element:
@@ -259,13 +270,78 @@ begins with "top"
 
       
 *** float : left, right
-*** hover
-*** focus
-*** enabled, disabled
+    
+*** 상태선택자
+**** hover
+**** focus
+**** enabled, disabled
+     
+*** 구조선택자
+**** nth-child(n)
+**** first-chile
+**** last-chile
+**** first-letter
+**** last-letter
+**** [[https://www.w3schools.com/cssref/css3_pr_border-radius.asp][border-radius]]  
+**** first-of-type, last-of-type
+*** link 선택자
+    - a::after
+#+BEGIN_SRC css3
+        #content a::after {
+            content: ' - ' attr(href);
+        }
+#+END_SRC
 
+*** 부정 선택자
+    - li::not(.fa)
+#+BEGIN_SRC css3
+        #content li:not(.fa) {
+            background-color:#ffd800;
+        }
+#+END_SRC
 
       
+*** Selection 선택자
+    - li::not(.fa)
+#+BEGIN_SRC css3
+        #content p:first-child::selection {
+            background-color:blue;
+            color:yellow;
+        }
+#+END_SRC
+
+*** CSS3 단위
+    - px : pixel
+    - em : 기본사이즈
+    - font-size : 100% <- 기본사이즈
+
+*** display
+    - The display property specifies the display behavior (the type of rendering box) of an element.
       
+#+BEGIN_SRC css3
+p.ex1 {display: none;}
+p.ex2 {display: inline;}
+p.ex3 {display: block;}
+p.ex4 {display: inline-block;}
+#+END_SRC
+
+*** background-image
+    
+#+BEGIN_SRC css3
+        #content {
+            width:80%;
+            height:100%;
+            margin:0 auto;
+            background-image:url('http://www.sba.seoul.kr/kr/images/index/visual16.jpg');
+            font-size:2em;
+            color:#ffffff;
+            font-weight:bold;
+            text-align:center;
+        }
+#+END_SRC
+*** block : div, p, li
+*** inline : 상,하 margin, 높이의 의미가 없음
+*** inline-block : 
 
 
 
