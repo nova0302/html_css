@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>JavaScript</title>
+		
+		<script>
+			
+			window.onload = function(){
+				
+				var ce = document.getElementById("cEvent");
+				//방법 I
+				ce.onclick = function(){
+					console.log("click!");
+					//이벤트 제거
+					//ce.onclick = null;
+				}
+				
+				/*
+				//방법 II
+				ce.onclick = clickEventHandler;
+				function clickEventHandler(){
+					console.log("clickEventHandler!");
+					//이벤트 제거
+					//ce.onclick = null;
+				}
+				*/
+				
+			};
+			
+			
+			
+		</script>
+		
+		<style>
+			#cEvent {
+				width: 200px; height: 100px;
+				line-height: 100px;
+				text-align: center;
+				font-size: 1.2em;
+				background-color: #f00;
+				color: #fff;
+				font-weight: bolder;
+			}
+		</style>
+	</head>
+	
+	<body>
+	
+		<div id="cEvent">click event</div>
+	
+	</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>JavaScript</title>
+		
+		<script>
+		
+			/*
+				IE8이전 버전에서 동작
+			*/
+			window.onload = function() {
+				function addHandler(){
+					console.log("click!!");
+				};
+				
+				function removeHandler(){
+					console.log("event remove!!");
+					ceA.detachEvent("onclick", addHandler, false);
+				};
+			
+				var ceA = document.getElementById("cEventAdd");
+				ceA.attachEvent("onclick", addHandler, false);
+			
+				var ceR = document.getElementById("cEventRem");
+				ceR.attachEvent("onclick", removeHandler, false);
+			};
+			
+		</script>
+		
+		<style>
+			#cEventAdd {
+				width: 200px; height: 100px;
+				line-height: 100px;
+				text-align: center;
+				font-size: 1.2em;
+				background-color: #f00;
+				color: #fff;
+				font-weight: bolder;
+			}
+			
+			#cEventRem {
+				width: 200px; height: 100px;
+				line-height: 100px;
+				text-align: center;
+				font-size: 1.2em;
+				background-color: #0f0;
+				color: #fff;
+				font-weight: bolder;
+			}
+		</style>
+	</head>
+	
+	<body>
+	
+		<div id="cEventAdd">click event</div>
+		<div id="cEventRem">remove event</div>
+	
+	</body>
+
+</html>
