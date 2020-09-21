@@ -325,6 +325,7 @@ p.ex3 {display: block;}
 p.ex4 {display: inline-block;}
 #+END_SRC
 
+
 *** background-image
     
 #+BEGIN_SRC css3
@@ -342,6 +343,9 @@ p.ex4 {display: inline-block;}
 *** block : div, p, li
 *** inline : 상,하 margin, 높이의 의미가 없음
 *** inline-block : 
+*** display:none <-> visibility:hidden 
+    - display:none ->  자리도 완전히 사라짐
+    - visibility:hidden -> 자리는 남고 보이지만 안음.
 
 
 
