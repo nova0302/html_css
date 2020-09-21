@@ -1,3 +1,37 @@
+* 계획
+| 주차 |   | 내용                      |   |
+|------+---+---------------------------+---|
+|    1 | 1 | HTML Intro & 계발환경설정 |   |
+|      | 2 | text, list,               |   |
+|------+---+---------------------------+---|
+|    2 | 1 | table tags                |   |
+|      | 2 | image,                    |   |
+|------+---+---------------------------+---|
+|    3 | 1 | form tag                  |   |
+|      | 2 | hyperlinks                |   |
+|------+---+---------------------------+---|
+|    4 | 1 | css  intro                |   |
+|      | 2 | css1                      |   |
+|------+---+---------------------------+---|
+|    5 | 1 | css2                      |   |
+|      | 2 | css3                      |   |
+|------+---+---------------------------+---|
+|    6 | 1 | js intro                  |   |
+|      | 2 | variable type             |   |
+|------+---+---------------------------+---|
+|    7 | 1 | function                  |   |
+|      | 2 | object                    |   |
+|------+---+---------------------------+---|
+|    8 | 1 | jQuery Intro              |   |
+|      | 2 |                           |   |
+|------+---+---------------------------+---|
+|    9 | 1 | JQuery Basic              |   |
+|      | 2 |                           |   |
+|------+---+---------------------------+---|
+|   10 | 1 | JQuery 응용               |   |
+|      | 2 |                           |   |
+|------+---+---------------------------+---|
+
 * 용어
 ** [[https://en.wikipedia.org/wiki/HTML][HTML(hyper text markup language)]] 
    - hyper text markup language
@@ -14,6 +48,7 @@
 ** [[https://en.wikipedia.org/wiki/World_Wide_Web_Consortium][W3C]] 
    - World Wide Web Consortium
    - the main international standards organization for the World Wide Web.
+   - the development of standards for the World Wide Web.
 ** [[https://en.wikipedia.org/wiki/World_Wide_Web][World Wide Web]] 
    - commonly known as the Web,
    - an information system where documents and other web resources are identified
@@ -33,3 +68,256 @@
    - due to the absence of hyperlinks. 
      
 ** [[http://html5test.com/]]
+
+* HTML && CSS
+  
+** HTML
+   - tag
+   - element
+   - *attribute*
+*** TAGS for Text     
+**** html
+**** head
+**** body
+**** title
+**** meta
+**** link
+     - The <link> tag defines the *relationship* between the current document and an external resource.
+     - The <link> tag is most often used to link to *external style sheets*.
+     - The <link> element is an empty element, it contains *attributes only*.
+       
+|-----------+------------+-------------------------------------------------|
+| Attribute | value      | Description                                     |
+|-----------+------------+-------------------------------------------------|
+| href      | URLs       | Specified the location of the linked document   |
+| rel       | stylesheet | required. Specifies the relationship between    |
+|           |            | the current document and the linked document    |
+| type      | media_type | Specifies the media type of the linked document |
+|-----------+------------+-------------------------------------------------|
+
+
+**** script
+**** style
+**** h1~h6
+**** br
+**** p
+**** hr
+**** pre
+**** blockquote
+**** strong
+**** b
+**** em
+**** i
+**** q
+**** mark
+**** span
+**** div
+**** ruby
+     
+*** Tags for list
+**** ul 
+**** li
+**** ol 
+
+**** dl(definition list), dt(a term/name), dd 
+     - Definition lists vary only slightly from other types of lists in that list items consist of two parts: a term and a description.
+     - The term is given by the DT element and is restricted to inline content.
+     - The description is given with a DD element that contains block-level content.
+       
+#+BEGIN_SRC html
+  <DL>
+    <DT>Dweeb
+    <DD>young excitable person who may mature
+      into a <EM>Nerd</EM> or <EM>Geek</EM>
+
+    <DT>Hacker
+    <DD>a clever programmer
+
+    <DT>Nerd
+    <DD>technically bright but socially inept person
+
+  </DL>
+#+END_SRC
+
+**** table
+     - rowspan - Specifies the number of rows a cell should span.
+     - Note: rowspan="0" tells the browser to span the cell to the last row of the table section (thead, tbody, or tfoot).
+     - Chrome, Firefox, and Opera 12 (and earlier versions) support rowspan="0".
+**** colgroup
+**** col
+**** tr
+**** th
+**** td 
+**** caption
+**** thead
+**** tbody
+**** tfoot
+       
+*** Tags for image, hyperlinks
+    - img, properties(src, alt, width, height)
+    - figure,, figcaption
+    - <a> properties(href, target, download, rel, hreflang, type)
+      1. You can use href="#top" or href="#" to link to the top of the current page!
+      2. If the href attribute is not present, the <a> tag is *not* a hyperlink.
+      3. target="_blank" <- open in new tab(or Window)
+      4. the *target* attribute specifies where the linked document will open the link
+      5. when the link is clicked.
+      6. If no target is specified, the link will open in the current context,
+      7. unless the user or browser specifies otherwise.
+      8. Read more: https://html.com/attributes/a-target/#ixzz6YUgVubt7
+
+*** Tags for form
+    - form(method, name, action, target),
+    - input(text, submit, )
+    - label
+    - filedset
+    - legend
+      
+** CSS
+   + 내부, 외부, inline style 
+   - *property*
+
+*** p {text-align : center;}
+*** selector : 
+**** simple selector( name, . class selector, # id selector)
+     
+**** Combinator selectors (select elements based on a specific relationship between them)
+     - A combinator is something that explains the relationship between the selectors.
+     - A CSS selector can contain more than one simple selector. Between the simple selectors, we can include a combinator.
+       1. descendant selector (space)
+       2. child selector (>)
+       3. adjacent sibling selector (+)
+       4. general sibling selector (~)
+
+    - Pseudo-class selectors (select elements based on a certain state)
+    - Pseudo-elements selectors (select and style a part of an element) 
+
+    - property
+    - value
+      
+**** Attribute Selectors
+#+BEGIN_SRC css3
+a[target] {
+  background-color: yellow;
+}
+// containg "_blank"
+a[target="_blank"] {
+  background-color: yellow;
+}
+
+// starting "_blank"
+[class|="top"] {
+  background: yellow;
+}
+begins with "top"
+[class^="top"] {
+  background: yellow;
+}
+// ends with "test"
+[class$="test"] {
+  background: yellow;
+}
+// containing "te"
+[class*="te"] {
+  background: yellow;
+}
+
+#+END_SRC
+
+
+
+*** properties
+    - color
+    - width, height
+    - border : px, solid, #ff0000
+    - background-color
+    - text-align
+    - font-weight
+    - font-size
+    - padding
+    - underline
+    - text-decoration : underline
+      
+*** margin
+    - margin : 0 0 0 0
+    - margin : 0 auto
+      
+*** clear : both
+    - Do not allow floating elements on the left or the right side of a specified <p> element:
+      
+*** overflow : scroll, hidden, auto, visible
+    - The overflow property specifies *what should happen* if content overflows an element's box.
+    - This property specifies whether to clip content or to add scrollbars
+    - when an element's content is too big to fit in a specified area.
+      
+| Value   | Description                                                                        |
+|---------+------------------------------------------------------------------------------------|
+| visible | The overflow is not clipped. It renders outside the element's box. This is default |
+| hidden  | The overflow is clipped, and the rest of the content will be invisible             |
+| scroll  | The overflow is clipped, but a scroll-bar is added to see the rest of the content  |
+|         |                                                                                    |
+
+      
+*** float : left, right
+*** hover
+*** focus
+*** enabled, disabled
+
+
+      
+      
+
+
+
+* JS && JQuery
+** JS
+   - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
+   - https://www.w3schools.com
+     
+*** 12. 내장객체
+    - String
+    - Math
+    - Data
+    - Array
+
+*** 13. BOM (Browser Object Mode)
+    * window.alert
+    * window.console.log
+    * window.open
+    * moveBy
+    * resizeBy
+    * window.onload
+
+
+*** 14. DOM (Document Object Model)
+    - document.createElement
+    - document.createTextnode
+    - document.body.appendchild
+      
+*** 15. event
+    - mouse, button, form, webpage load, focus, 
+    - xxx.onclick = function(){}
+      
+**** 이벤트 형식
+      
+#+BEGIN_SRC js
+
+xxx.onclick = function(){//}
+      | |       |
+      | |       |---> event handler
+      | |-----------> event attribute(onclick)
+      |-------------> event name(click)
+
+#+END_SRC
+
+**** 이벤트 모델
+     - COM level 0
+       a. inline model
+       b. *basic model*
+     - DOM level 2
+       a. ms handler model
+       b. *standard handler model*
+       
+*** 16. advanced event
+*** 19. 객체생성, 삽입, 이동, 복제
+    - $() 문서객체생성
