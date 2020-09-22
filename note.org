@@ -354,6 +354,60 @@ p.ex4 {display: inline-block;}
    - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
    - https://www.w3schools.com
      
+*** 02. 기본 입출력
+    - prompt
+    - alert
+    - confirm
+
+    - console.log()
+
+*** 11. 객체 심화 
+    - 객체생성 {} <-> Array 생성 [] or new Array();
+    - 객체의 멤버변수는 name : value,
+    - where vale can be either field or function
+    - {}, 함수에 의한 생성에는 :
+    - 생성자에 의한 생성 =
+      
+**** {}를 사용하여 생성
+     #+BEGIN_SRC javascript
+var carObj = {
+name : "소나타"
+,price : 2000
+,size : 500
+,capacity : 5};
+     
+     #+END_SRC
+
+**** 함수를 사용하여 생
+     #+BEGIN_SRC javaScript
+function createCar(name, color, speed){
+var o = {
+name : name
+,color : color
+,speed : speed
+,fun : function(){
+return this.speed + "km/h";
+}
+};
+return o;
+}
+
+var sonata = createCar("sonata", "red", 200);
+     #+END_SRC
+
+**** 생성자를 이용한 객체생성
+#+BEGIN_SRC javascript
+function theCar(name, color, speed){
+this.name = name
+,this.color  = color
+,this.speed = speed
+,this.run = function(){
+return this.speed + "fly!";
+}}
+
+#+END_SRC
+
+
 *** 12. 내장객체
     - String
     - Math
@@ -373,6 +427,30 @@ p.ex4 {display: inline-block;}
     - document.createElement
     - document.createTextnode
     - document.body.appendchild
+      
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to create a P element with some text.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+  var para = document.createElement("P");
+  para.innerText = "This is a paragraph.";
+  document.body.appendChild(para);
+}
+</script>
+
+</body>
+</html>
+
+
+
+#+END_SRC
       
 *** 15. event
     - mouse, button, form, webpage load, focus, 
