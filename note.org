@@ -173,7 +173,7 @@
     - filedset
     - legend
       
-** CSS
+** [[https://www.w3schools.com/css/css_syntax.asp][CSS]]  
    + 내부, 외부, inline style 
    - *property*
 
@@ -361,6 +361,160 @@ p.ex4 {display: inline-block;}
 
     - console.log()
 
+*** 10. 함수 심화
+**** [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures][closure01]]  
+     
+#+BEGIN_SRC html
+<!doctype html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  </head>
+
+  <body>
+
+    <div>
+      <h3> Practical Use of JavaScript Closure consept/private variable. </h3>
+
+      <div class="cartdiv">
+	<span id="cartcount">0</span>
+      </div>
+
+      <div class="productslist">
+	<ul >
+	  <li class="item">Product 1</li>
+	  <li class="item">Product 2</li>
+	  <li class="item">Product 3</li>
+	</ul>
+      </div>
+
+    </div>
+
+    <script src="hello.js", type="text/javaScript"> </script>
+  </body>
+</html>
+#+END_SRC
+#+BEGIN_SRC javaScript
+//Counter clouser implemented function;
+var CartCouter = function(){
+    var counter = 0;
+    return {
+  	increment: function(){counter++;},
+	decrement: function(){counter--;},
+	value: function(){return counter;}
+    }
+}
+
+var cartCount = CartCouter();
+
+function updateCart(){
+    document.getElementById('cartcount').innerHTML = cartCount.value();
+}
+
+var productlist = document.getElementsByClassName('item');
+
+for(var i = 0; i< productlist.length; i++){
+    productlist[i].addEventListener('click', function(){
+  	if(this.className.indexOf('selected')<0){
+    	    this.className += " selected";
+            cartCount.increment();
+	} else{
+    	    this.className = this.className.replace("selected", "");
+	    cartCount.decrement();
+	}
+        updateCart();
+    });
+}
+#+END_SRC
+#+BEGIN_SRC css3
+h3{
+  padding:10px;
+  border: 1px solid #ddd;
+}
+.productslist{
+  padding:10px;
+  border: 1px solid #ddd;
+}
+ul li{
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-align: center;
+  width: 25%;
+  cursor: pointer;
+}
+.selected{
+  background-color: #7CFEF0;
+  color: #333;
+}
+.cartdiv{
+  position: relative;
+  float:right;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 1px solid #f1f1f1;
+}
+#+END_SRC
+
+
+**** closure02
+#+BEGIN_SRC html
+<!doctype html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" media="screen" />
+    
+  </head>
+
+  <body>
+    <p>Some paragraph text</p>
+    <h1>some heading 1 text</h1>
+    <h2>some heading 2 text</h2>
+
+    <a href="#" id="size-12">12</a>
+    <a href="#" id="size-14">14</a>
+    <a href="#" id="size-16">16</a>
+
+    <script src="hello.js" type="text/javaScript">
+      
+    </script>
+
+  </body>
+</html>
+#+END_SRC     
+#+BEGIN_SRC javaScript
+function makeSizer(size) {
+  return function() {
+    document.body.style.fontSize = size + 'px';
+  };
+}
+
+var size12 = makeSizer(12);
+var size14 = makeSizer(14);
+var size16 = makeSizer(16);
+
+document.getElementById('size-12').onclick = size12;
+document.getElementById('size-14').onclick = size14;
+document.getElementById('size-16').onclick = size16;
+#+END_SRC
+#+BEGIN_SRC css3
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+h2 {
+  font-size: 1.2em;
+}
+
+#+END_SRC
+
+
 *** 11. 객체 심화 
     - 객체생성 {} <-> Array 생성 [] or new Array();
     - 객체의 멤버변수는 name : value,
@@ -407,7 +561,6 @@ return this.speed + "fly!";
 
 #+END_SRC
 
-
 *** 12. 내장객체
     - String
     - Math
@@ -421,7 +574,6 @@ return this.speed + "fly!";
     * moveBy
     * resizeBy
     * window.onload
-
 
 *** 14. DOM (Document Object Model)
     - document.createElement
@@ -479,3 +631,31 @@ xxx.onclick = function(){//}
 *** 16. advanced event
 *** 19. 객체생성, 삽입, 이동, 복제
     - $() 문서객체생성
+      
+** JQuery
+   - jQuery is open source, cross-browser JavaScript library
+   - designed to simplify the client-side scripting of HTML.
+   - jQuery's syntax is designed to make it easier
+   - to navigate a document,
+   - select DOM elements,
+   - create animations,
+   - handle events,
+   - and develop Ajax applications.
+     
+*** sign
+    - $ sign is just an alias for jQuery, a short version of jQuery.
+    - The idea is that everything is done with this one global symbol.
+
+* Misc
+** AJax(Aynchronous JavaScript And XML)
+   - AJAX is a developer's dream, because you can:
+   - Update a web page without reloading the page
+   - Request data from a server - after the page has loaded
+   - Receive data from a server - after the page has loaded
+   - Send data to a server - in the background
+*** What is AJAX
+    - AJAX = Asynchronous JavaScript And XML.
+    - AJAX is not a programming language.
+    - AJAX just uses a combination of:
+    - A browser built-in XMLHttpRequest object (to request data from a web server)
+    - JavaScript and HTML DOM (to display or use the data)
