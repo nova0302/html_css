@@ -1,0 +1,560 @@
+* JS && JQuery
+** JS
+   - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
+   - https://www.w3schools.com
+     
+*** 02. 기본 입출력
+    - prompt
+    - alert
+    - confirm
+    - console.log()
+      
+*** 04. 연산자
+**** == equality or abstract comparison operator
+     - converts the variable values to the same type beore performing comparison.
+     - This is called *type coercion*.
+     - [[https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion]]
+
+**** === identity or strict comparison operator
+     - does not do any type conversion (coercion) and returns true
+     - only if both values and types are identical for the two variables being compared.
+       
+#+BEGIN_SRC js
+//https://codeahoy.com/javascript/2019/10/12/==-vs-===-in-javascript/#:~:text=The%20difference%20between%20%3D%3D%20and%20%3D%3D%3D%20is%20that%3A,the%20two%20variables%20being%20compared.
+var one = 1;
+var one_again = 1;
+var one_string = "1";  // note: this is string
+
+console.log(one ==  one_again);  // true
+console.log(one === one_again);  // true
+console.log(one ==  one_string); // true. See below for explanation.
+console.log(one === one_string); // false. See below for explanation.
+
+#+END_SRC
+
+*** 10. 함수 심화
+**** [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures][closure01]]  
+     
+#+BEGIN_SRC html
+  <!doctype html>
+  <html>
+
+    <head>
+      <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+
+    <body>
+
+      <div>
+	<h3> Practical Use of JavaScript Closure consept/private variable. </h3>
+
+	<div class="cartdiv">
+	  <span id="cartcount">0</span>
+	</div>
+
+	<div class="productslist">
+	  <ul >
+	    <li class="item">Product 1</li>
+	    <li class="item">Product 2</li>
+	    <li class="item">Product 3</li>
+	  </ul>
+	</div>
+
+      </div>
+
+      <script src="hello.js", type="text/javaScript"> </script>
+    </body>
+  </html>
+#+END_SRC
+
+#+BEGIN_SRC js
+// hello.js
+  //Counter clouser implemented function;
+  var CartCouter = function(){
+      var counter = 0;
+      return {
+	  increment: function(){counter++;},
+	  decrement: function(){counter--;},
+	  value: function(){return counter;}
+      }
+  }
+
+  var cartCount = CartCouter();
+
+  function updateCart(){
+      document.getElementById('cartcount').innerHTML = cartCount.value();
+  }
+
+  var productlist = document.getElementsByClassName('item');
+
+  for(var i = 0; i< productlist.length; i++){
+      productlist[i].addEventListener('click', function(){
+	  if(this.className.indexOf('selected')<0){
+	      this.className += " selected";
+	      cartCount.increment();
+	  } else{
+	      this.className = this.className.replace("selected", "");
+	      cartCount.decrement();
+	  }
+	  updateCart();
+      });
+  }
+#+END_SRC
+
+#+BEGIN_SRC css
+// stylesheet.css
+  h3{
+      padding:10px;
+      border: 1px solid #ddd;
+  }
+  .productslist{
+      padding:10px;
+      border: 1px solid #ddd;
+  }
+  ul li{
+      display: inline-block;
+      padding: 5px;
+      border: 1px solid #ddd;
+      text-align: center;
+      width: 25%;
+      cursor: pointer;
+  }
+  .selected{
+      background-color: #7CFEF0;
+      color: #333;
+  }
+  .cartdiv{
+      position: relative;
+      float:right;
+      padding: 5px;
+      box-sizing: border-box;
+      border: 1px solid #f1f1f1;
+  }
+#+END_SRC
+
+**** closure02
+#+BEGIN_SRC html
+  <!doctype html>
+  <html>
+
+    <head>
+      <link rel="stylesheet" href="stylesheet.css" type="text/css" media="screen" />
+    
+    </head>
+
+    <body>
+      <p>Some paragraph text</p>
+      <h1>some heading 1 text</h1>
+      <h2>some heading 2 text</h2>
+
+      <a href="#" id="size-12">12</a>
+      <a href="#" id="size-14">14</a>
+      <a href="#" id="size-16">16</a>
+
+      <script src="hello.js" type="text/javaScript">
+      
+      </script>
+
+    </body>
+  </html>
+#+END_SRC     
+
+#+BEGIN_SRC js
+//hello.js
+  function makeSizer(size) {
+      return function() {
+	  document.body.style.fontSize = size + 'px';
+	  console.log('document.body.style.fontSize :' + document.body.style.fontSize);
+      };
+  }
+
+  var size12 = makeSizer(12);
+  var size14 = makeSizer(14);
+  var size16 = makeSizer(16);
+
+  document.getElementById('size-12').onclick = size12;
+  document.getElementById('size-14').onclick = size14;
+  document.getElementById('size-16').onclick = size16;
+#+END_SRC
+
+#+BEGIN_SRC css
+//stylesheet.css
+  body {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+  }
+
+  h1 {font-size: 1.5em;}
+  h2 {font-size: 1.2em;}
+
+#+END_SRC
+
+**** [[https://www.a-mean-blog.com/ko/blog/%ED%86%A0%EB%A7%89%EA%B8%80/_/Javascript-%ED%99%94%EC%82%B4%ED%91%9C-%ED%95%A8%EC%88%98-Arrow-Functions][Arrow Functions]]  
+     
+#+BEGIN_SRC js
+var myObj = { 
+  myText: "hi!",
+  myFunc: function(){
+    setTimeout(function(){
+      console.log(this.myText);
+    }, 1000)
+  },
+  myFunc2: function(){
+    setTimeout(()=>console.log(this.myText), 1000);
+  }
+};
+
+myObj.myFunc(); // undefined
+myObj.myFunc2(); // "hi!"
+#+END_SRC
+*** 11. 객체 심화 
+    - 객체생성 {} <-> Array 생성 [] or new Array();
+    - 객체의 멤버변수는 name : value,
+    - where vale can be either field or function
+    - {}, 함수에 의한 생성에는 :
+    - 생성자에 의한 생성 =
+**** 객체생성방법3가지      
+***** {}를 사용하여 생성
+      #+BEGIN_SRC js
+	var carObj = {
+	    name      : "소나타"
+	    ,price    : 2000
+	    ,size     : 500
+	    ,capacity : 5};
+
+      #+END_SRC
+
+***** 함수를 사용하여 생
+      #+BEGIN_SRC js
+	function createCar(name, color, speed){
+	    var obj = {
+		name   : name
+		,color : color
+		,speed : speed
+		,fun : function(){
+		    return this.speed + "km/h";
+		}
+	    };
+	    return obj;
+	}
+
+	var sonata = createCar("sonata", "red", 200);
+      #+END_SRC
+
+***** 생성자를 이용한 객체생성
+ #+BEGIN_SRC js
+   function theCar(name, color, speed){
+       this.name    = name
+       ,this.color  = color
+       ,this.speed  = speed
+       ,this.run    = function(){
+	   return this.speed + "fly!";
+       }}
+
+ #+END_SRC
+
+**** [[https://www.hongkiat.com/blog/getters-setters-javascript/][getters && setters]]  
+    
+***** 1. with methods
+ #+BEGIN_SRC js
+   var obj = {
+       foo : 'this is the value of foo',
+       getFoo : function(){return this.foo;},
+       setFoo : function(val){ this.foo = val;}
+   };
+   console.log(obj.getFoo());
+   obj.setFoo('Hello');
+   console.log(obj.getFoo());
+ #+END_SRC
+***** 2. With keywords(get,set)
+ #+BEGIN_SRC js
+   var obj = {
+       fooVal : 'this is the value of foo',
+       get foo(){return this.fooVal;},
+       set foo(val){ this.fooVal = val;}
+   };
+   console.log(obj.foo);
+   obj.foo = 'Hello';
+   console.log(obj.foo);
+ #+END_SRC
+***** 3. Operations inside getters && setters
+ #+BEGIN_SRC js
+   var obj = {
+       n : 67,
+       get id(){ return 'The ID is: ' + this.n;},
+       set id(val){ if(typeof val === 'number')
+	   this.n = val;
+	   }
+   };
+
+   console.log(obj.id);
+   obj.id = 983;
+   console.log(obj.id);
+   obj.id= 'hello';
+   console.log(obj.id);
+
+ #+END_SRC
+
+***** [[https://www.hongkiat.com/blog/getters-setters-javascript/][4. Protect data with getters and setters]]  
+      - 1. block scope
+      - 2. function scope
+ #+BEGIN_SRC js
+ function myobj(){
+   var fooVal = 'this is the value of foo';
+   return {
+       get foo() {
+           return fooVal;
+       },
+       set foo(val) {
+           fooVal = val
+       }
+   }
+ }
+ 
+ fooVal = 'hello';
+ // not going to affect our original fooVal
+ 
+ var obj = myobj();
+ 
+ console.log(obj.foo);
+ // "this is the value of foo"
+
+ #+END_SRC
+*** 12. 내장객체
+    - String
+    - Math
+    - Data
+    - Array
+
+*** 13. BOM (Browser Object Mode)
+    * window.alert
+    * window.console.log
+    * window.open
+    * moveBy
+    * resizeBy
+    * window.onload
+    * location.href
+      
+**** location.href
+     
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to set the href value to https://www.w3schools.com.</p>
+
+<button onclick="myFunction()">Take me to w3schools.com</button>
+
+<script>
+function myFunction() {
+  location.href = "https://www.w3schools.com";
+}
+</script>
+
+</body>
+</html>
+#+END_SRC
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to set the href value to https://www.w3schools.com.</p>
+
+<button onclick="f1()">Take me to w3schools.com</button>
+<button onclick="f2()">Take me to google.com</button>
+<button onclick="f3()">Take me to yahoo.com</button>
+<button onclick="f4()">Take me to yahoo.com</button>
+<br>
+<a href="https://www.w3schools.com">https://www.w3schools.com</a>
+<a href="https://www.google.com">https://www.google.com</a>
+<a href="https://www.yahoo.com">https://www.yahoo.com</a>
+
+<script>
+function f1() {location.href = "https://www.w3schools.com";}
+function f2() {location.href = "https://www.google.com";}
+function f3() {location.href = "https://www.yahoo.com";}
+function f4() {window.open("https://www.yahoo.com");}
+</script>
+
+</body>
+</html>
+
+
+#+END_SRC
+**** window.onload
+     
+#+BEGIN_SRC html
+<!doctype html>
+<html>
+
+  <head>
+    <!--  https://www.w3schools.com/jsref/met_win_open.asp -->
+    <title> WOM (Window Object Model) </title>
+    <script>
+      window.onload = function (){
+	  console.log("first");
+      };
+    </script>
+  </head>
+
+  <body>
+
+    <script>
+	  console.log("second");
+    </script>
+
+    <script>
+	  console.log("third");
+    </script>
+
+  </body>
+</html>
+#+END_SRC
+
+*** 14. DOM (Document Object Model)
+    - document.getElementById
+    - document.getElementsByClassName
+    - document.getElementsByTagName
+    - document.querySelector
+    - document.querySelectorAll
+
+    - document.createElement
+    - document.createTextNode
+    - document.body.appendchild
+      
+**** getElementById
+**** getElementsByClassName
+**** getElementsByTagName
+**** [[https://www.w3schools.com/jsref/met_document_queryselector.asp][querySelector]]   
+**** [[https://www.w3schools.com/jsref/met_document_queryselectorall.asp][querySelectorAll]]  
+**** createElement && createTextNode && appendChild
+#+BEGIN_SRC html
+<!doctype html>
+<html>
+
+  <head>
+    <script>
+      window.onload = function(){
+      var eNode = document.createElement("p");
+      var tNode = document.createTextNode("javaScript & node.js");
+      var hNode = document.createElement("h1");
+      var tNode1 = document.createTextNode("javaScript & node.js");
+      eNode.appendChild(tNode);
+      hNode.appendChild(tNode1);
+      eNode.appendChild(hNode);
+
+      document.body.appendChild(eNode);
+      };
+    </script>
+    
+  </head>
+
+  <body>
+
+  </body>
+</html>
+#+END_SRC
+     
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to create a P element with some text.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+  var para = document.createElement("P");
+  para.innerText = "This is a paragraph.";
+  document.body.appendChild(para);
+}
+</script>
+
+</body>
+</html>
+
+
+
+#+END_SRC
+      
+*** 15. event
+    - mouse, button, form, webpage load, focus, 
+    - xxx.onclick = function(){}
+      
+**** 이벤트 형식
+      
+#+BEGIN_SRC js
+
+xxx.onclick = function(){//}
+      | |       |
+      | |       |---> event handler
+      | |-----------> event attribute(onclick)
+      |-------------> event name(click)
+
+#+END_SRC
+
+**** 이벤트 모델
+     - DOM level 0
+       a. inline model
+       b. *basic model*
+     - DOM level 2
+       a. ms handler model
+       b. *standard handler model*
+       
+*** 16. advanced event
+*** 17. JQuery 개요 및 기본문법편
+*** 19. 객체생성, 삽입, 이동, 복제
+    - $() 문서객체생성
+      
+*** Misc
+    
+**** [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number][Number]]  
+    
+**** [[https://www.hongkiat.com/blog/useful-javascript-statements/][4 Useful JavaScript Statements you should know]] 
+     1. Empty Statement(;)
+     2. The *debugger* Statement
+     3. Labeled Statement
+     4. The *with* Statement
+
+      
+** JQuery
+   - jQuery is open source, cross-browser JavaScript library
+   - designed to simplify the client-side scripting of HTML.
+   - jQuery's syntax is designed to make it easier
+   - to navigate a document,
+   - select DOM elements,
+   - create animations,
+   - handle events,
+   - and develop Ajax applications.
+     
+*** sign
+    - $ sign is just an alias for jQuery, a short version of jQuery.
+    - The idea is that everything is done with this one global symbol.
+
+* Misc
+** AJax(Aynchronous JavaScript And XML)
+   - AJAX is a developer's dream, because you can:
+   - Update a web page without reloading the page
+   - Request data from a server - after the page has loaded
+   - Receive data from a server - after the page has loaded
+   - Send data to a server - in the background
+*** What is AJAX
+    - AJAX = Asynchronous JavaScript And XML.
+    - AJAX is not a programming language.
+    - AJAX just uses a combination of:
+    - A browser built-in XMLHttpRequest object (to request data from a web server)
+    - JavaScript and HTML DOM (to display or use the data)
+      
+** [[https://stackoverflow.com/questions/4855168/what-is-href-and-why-is-it-used][<a ref="#" id="size-12"> 12 </a>]]  
+   
+** textNode vs tagNode
+   - createElement -> node
+   - createTextNode -> text 
+** [[https://www.oxfordlearnersdictionaries.com/definition/english/coercion?q=coercion][coercion]] 
+   - ​the action of making somebody do something that they do not want to do,
+   - using force or threatening to use force
