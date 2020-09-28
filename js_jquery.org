@@ -190,6 +190,7 @@ console.log(one === one_string); // false. See below for explanation.
 #+END_SRC
 
 **** [[https://www.a-mean-blog.com/ko/blog/%ED%86%A0%EB%A7%89%EA%B8%80/_/Javascript-%ED%99%94%EC%82%B4%ED%91%9C-%ED%95%A8%EC%88%98-Arrow-Functions][Arrow Functions]]  
+     - [[https://www.w3schools.com/js/js_arrow_function.asp][w3school]]
      
 #+BEGIN_SRC js
 var myObj = { 
@@ -320,11 +321,62 @@ myObj.myFunc2(); // "hi!"
  // "this is the value of foo"
 
  #+END_SRC
+**** [[https://www.w3schools.com/js/js_object_prototypes.asp][prototype]]  
+     - All JavaScript objects inherit properties and methods from a prototype.
+     - To add a new property to a constructor, you must add it to the constructor function:
+     - The JavaScript prototype property allows you to add new properties to object constructors:
+       
+#+BEGIN_SRC js
+  function Person(first, last, age, eyecolor) {
+      this.firstName = first;
+      this.lastName = last;
+      this.age = age;
+      this.eyeColor = eyecolor;
+  }
+
+  Person.prototype.nationality = "English";
+
+#+END_SRC
+     - The JavaScript prototype property also allows you to add new methods to objects constructors:
+       
+#+BEGIN_SRC js
+  function Person(first, last, age, eyecolor) {
+      this.firstName = first;
+      this.lastName = last;
+      this.age = age;
+      this.eyeColor = eyecolor;
+  }
+
+  Person.prototype.name = function() {
+      return this.firstName + " " + this.lastName;
+  };
+
+#+END_SRC
 *** 12. 내장객체
-    - String
+    - String(charCodeAt, charAt, search, lastIndexOf, slice, substring, substr)
     - Math
     - Data
     - Array
+      
+**** [[https://www.w3schools.com/js/js_string_methods.asp][String]]  
+     
+***** search & indexOf
+      - The two methods, indexOf() and search(), are equal?
+      - They accept the same arguments (parameters), and return the same value?
+      - The two methods are NOT equal. These are the differences:
+      - The search() method cannot take a second start position argument.
+      - The indexOf() method cannot take powerful search values (regular expressions).
+
+***** lastIndexOf()
+      - The lastIndexOf() method returns the index of the last occurrence of a specified text in a string:
+
+***** slice()
+      - slice() extracts a part of a string and returns the extracted part in a new string.
+      - The method takes 2 parameters: the start position, and the end position (end not included).
+***** Extracting String Parts
+      - slice(start, end)
+      - substring(start, end)
+      - substr(start, length)
 
 *** 13. BOM (Browser Object Mode)
     * window.alert
@@ -558,3 +610,17 @@ xxx.onclick = function(){//}
 ** [[https://www.oxfordlearnersdictionaries.com/definition/english/coercion?q=coercion][coercion]] 
    - ​the action of making somebody do something that they do not want to do,
    - using force or threatening to use force
+
+     
+** [[https://www.w3schools.com/js/js_es6.asp][ES6]]  
+   - ECMAScript 6 is also known as ES6 and ECMAScript 2015.
+   - Some people call it JavaScript 6.
+   - This chapter will introduce some of the new features in ES6.
+   - JavaScript let
+   - JavaScript const
+   - JavaScript Arrow Functions
+   - JavaScript Classes
+   - Default parameter values
+   - Array.find()
+   - Array.findIndex()
+   - Exponentiation (**) (EcmaScript 2016)
