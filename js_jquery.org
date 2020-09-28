@@ -245,8 +245,9 @@ myObj.myFunc2(); // "hi!"
     - 객체생성 {} <-> Array 생성 [] or new Array();
     - 객체의 멤버변수는 name : value,
     - where vale can be either field or function
-    - {}, 함수에 의한 생성에는 :
-    - 생성자에 의한 생성 =
+    - {}와 함수에 의한 생성에는 : 그리고 ,로 분리
+    - 생성자에 의한 생성 = 그리고 ;으로 분리, 모든 멤버에 this.xxx
+
 **** 객체생성방법3가지      
 ***** {}를 사용하여 생성
       #+BEGIN_SRC js
@@ -278,12 +279,12 @@ myObj.myFunc2(); // "hi!"
 ***** 생성자를 이용한 객체생성
  #+BEGIN_SRC js
    function theCar(name, color, speed){
-       this.name    = name
-       ,this.color  = color
-       ,this.speed  = speed
-       ,this.run    = function(){
+       this.name    = name;
+       this.color  = color;
+       this.speed  = speed;
+       this.run    = function(){
 	   return this.speed + "fly!";
-       }}
+       }};
 
  #+END_SRC
 
@@ -300,7 +301,7 @@ myObj.myFunc2(); // "hi!"
    obj.setFoo('Hello');
    console.log(obj.getFoo());
  #+END_SRC
-***** 2. With keywords(get,set)
+***** 2. with keywords(get,set)
  #+BEGIN_SRC js
    var obj = {
        fooVal : 'this is the value of foo',
@@ -375,9 +376,9 @@ myObj.myFunc2(); // "hi!"
 #+BEGIN_SRC js
   function Person(first, last, age, eyecolor) {
       this.firstName = first;
-      this.lastName = last;
-      this.age = age;
-      this.eyeColor = eyecolor;
+      this.lastName  = last;
+      this.age       = age;
+      this.eyeColor  = eyecolor;
   }
 
   Person.prototype.name = function() {
