@@ -1,3 +1,6 @@
+#+STARTUP: showeverything
+
+
 * JS && JQuery
 ** JS
    - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
@@ -32,6 +35,36 @@ console.log(one === one_string); // false. See below for explanation.
 
 #+END_SRC
 
+*** 09. [[https://www.w3schools.com/js/js_function_parameters.asp][함수 기본]]
+**** Parameter Rules
+     - JavaScript function definitions do not specify data types for parameters.
+     - JavaScript functions do not perform type checking on the passed arguments.
+     - JavaScript functions do not check the number of arguments received.
+**** Default Parameters
+     - JavaScript functions have a built-in object called the arguments object.
+     - The argument object contains an array of the arguments used when the function was called (invoked).
+     - This way you can simply use a function to find (for instance) the highest value in a list of numbers:
+**** Arguments are Passed by Value
+**** Objects are Passed by Reference
+     
+#+BEGIN_SRC js
+  var aa={name:"Pter",
+	  age : "17"};
+  var theStr = "HelloWorld";
+
+  console.log("theStr : " + theStr);
+  console.log("theStr.toUpperCase() : " + theStr.toUpperCase());
+
+  function nameToUpper(v1){
+      console.log("v1.name : " + v1.name);
+      console.log("typeof(v1.name) : " + typeof v1.name);
+      v1.name = v1.name.toUpperCase();
+      console.log("v1.name : " + v1.name);
+  }
+  nameToUpper(aa);
+  console.log("aa.name : " + aa.name);
+
+#+END_SRC
 *** 10. 함수 심화
 **** [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures][closure01]]  
      
