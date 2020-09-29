@@ -272,7 +272,6 @@ myObj.myFunc2(); // "hi!"
 	    };
 	    return obj;
 	}
-
 	var sonata = createCar("sonata", "red", 200);
       #+END_SRC
 
@@ -284,13 +283,14 @@ myObj.myFunc2(); // "hi!"
        this.speed  = speed;
        this.run    = function(){
 	   return this.speed + "fly!";
-       }};
+       };
+   };
 
  #+END_SRC
 
 **** [[https://www.hongkiat.com/blog/getters-setters-javascript/][getters && setters]]  
     
-***** 1. with methods
+***** 1. with *methods*
  #+BEGIN_SRC js
    var obj = {
        foo : 'this is the value of foo',
@@ -301,25 +301,26 @@ myObj.myFunc2(); // "hi!"
    obj.setFoo('Hello');
    console.log(obj.getFoo());
  #+END_SRC
-***** 2. with keywords(get,set)
+***** 2. with *keywords(get,set)*
  #+BEGIN_SRC js
    var obj = {
-       fooVal : 'this is the value of foo',
-       get foo(){return this.fooVal;},
-       set foo(val){ this.fooVal = val;}
+       foo: 'this is the value of foo',
+       get Foo(){return this.fooVal;},
+       set Foo(val){ this.fooVal = val;}
    };
-   console.log(obj.foo);
-   obj.foo = 'Hello';
-   console.log(obj.foo);
+   console.log(obj.Foo);
+   obj.Foo = 'Hello';
+   console.log(obj.Foo);
  #+END_SRC
 ***** 3. Operations inside getters && setters
  #+BEGIN_SRC js
    var obj = {
        n : 67,
        get id(){ return 'The ID is: ' + this.n;},
-       set id(val){ if(typeof val === 'number')
-	   this.n = val;
-	   }
+       set id(val){ 
+	   if(typeof val === 'number')
+	       this.n = val;
+       }
    };
 
    console.log(obj.id);
@@ -331,6 +332,7 @@ myObj.myFunc2(); // "hi!"
  #+END_SRC
 
 ***** [[https://www.hongkiat.com/blog/getters-setters-javascript/][4. Protect data with getters and setters]]  
+
       - 1. block scope
       - 2. function scope
  #+BEGIN_SRC js
@@ -355,6 +357,12 @@ myObj.myFunc2(); // "hi!"
  // "this is the value of foo"
 
  #+END_SRC
+***** Wyh using Getters and Setters?
+      - It gives simpler syntax
+      - It allows equal syntax for properties and methods
+      - It can secure better data quality
+      - It is useful for doing things behind-the-scenes
+
 **** [[https://www.w3schools.com/js/js_object_prototypes.asp][prototype]]  
      - All JavaScript objects inherit properties and methods from a prototype.
      - To add a new property to a constructor, you must add it to the constructor function:
