@@ -1,7 +1,18 @@
 #+STARTUP: showeverything
+* Overview
+** HTML       => Content
+** CSS        => Style
+** JavaScript => Behavior
 
 
 * JS && JQuery
+  
+** Primary JavaScript Tasks
+   1. Event Handling
+   2. DOM Traversal
+   3. DOM Manipulation
+   4. Send/receive data without page refresh
+
 ** JS
    - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
    - https://www.w3schools.com
@@ -245,7 +256,7 @@ myObj.myFunc2(); // "hi!"
     - 객체생성 {} <-> Array 생성 [] or new Array();
     - 객체의 멤버변수는 name : value,
     - where vale can be either field or function
-    - {}와 함수에 의한 생성에는 : 그리고 ,로 분리
+    - {}에 의한 생성에는 : 그리고 ,로 분리
     - 생성자에 의한 생성 = 그리고 ;으로 분리, 모든 멤버에 this.xxx
 
 **** 객체생성방법3가지      
@@ -259,7 +270,7 @@ myObj.myFunc2(); // "hi!"
 
       #+END_SRC
 
-***** 함수를 사용하여 생
+***** 함수를 사용하여 생성
       #+BEGIN_SRC js
 	function createCar(name, color, speed){
 	    var obj = {
@@ -282,7 +293,7 @@ myObj.myFunc2(); // "hi!"
        this.color  = color;
        this.speed  = speed;
        this.run    = function(){
-	   return this.speed + "fly!";
+	   return this.speed + "flies!";
        };
    };
 
@@ -295,39 +306,45 @@ myObj.myFunc2(); // "hi!"
    var obj = {
        foo : 'this is the value of foo',
        getFoo : function(){return this.foo;},
-       setFoo : function(val){ this.foo = val;}
+       setFoo : function(foo){ this.foo = foo;}
    };
    console.log(obj.getFoo());
    obj.setFoo('Hello');
    console.log(obj.getFoo());
  #+END_SRC
+
 ***** 2. with *keywords(get,set)*
  #+BEGIN_SRC js
-   var obj = {
+    var obj = {
        foo: 'this is the value of foo',
-       get Foo(){return this.fooVal;},
-       set Foo(val){ this.fooVal = val;}
+       get Foo(){return this.foo;},
+       set Foo(foo){ this.foo = foo;}
    };
    console.log(obj.Foo);
    obj.Foo = 'Hello';
-   console.log(obj.Foo);
+   console.log("The value of obj.foo : " + obj.Foo);
  #+END_SRC
+
 ***** 3. Operations inside getters && setters
  #+BEGIN_SRC js
+ 
    var obj = {
-       n : 67,
-       get id(){ return 'The ID is: ' + this.n;},
-       set id(val){ 
-	   if(typeof val === 'number')
-	       this.n = val;
+       id : 67,
+       get Id(){ return 'The ID is: ' + this.id;},
+       set Id(id){ 
+	   if(typeof id === 'number'){
+	       this.id = id;
+	   }else{
+	       console.log("Warning!!, the id : "+ id +" is not valid one...")
+	   }
        }
    };
 
-   console.log(obj.id);
-   obj.id = 983;
-   console.log(obj.id);
-   obj.id= 'hello';
-   console.log(obj.id);
+   console.log(obj.Id);
+   obj.Id = 983;
+   console.log(obj.Id);
+   obj.Id= 'hello';
+   console.log(obj.Id);
 
  #+END_SRC
 
@@ -486,7 +503,7 @@ function f4() {window.open("https://www.yahoo.com");}
 
   <head>
     <!--  https://www.w3schools.com/jsref/met_win_open.asp -->
-    <title> WOM (Window Object Model) </title>
+    <title> BOM (Browser Object Model) </title>
     <script>
       window.onload = function (){
 	  console.log("first");
@@ -509,15 +526,15 @@ function f4() {window.open("https://www.yahoo.com");}
 #+END_SRC
 
 *** 14. DOM (Document Object Model)
-    - document.getElementById
-    - document.getElementsByClassName
-    - document.getElementsByTagName
-    - document.querySelector
-    - document.querySelectorAll
+    1. document.getElementById
+    2. document.getElementsByClassName
+    3. document.getElementsByTagName
+    4. document.querySelector
+    5. document.querySelectorAll
+    6. document.createElement
+    7. document.createTextNode
+    8. document.body.appendchild
 
-    - document.createElement
-    - document.createTextNode
-    - document.body.appendchild
       
 **** getElementById
 **** getElementsByClassName
