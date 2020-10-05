@@ -56,24 +56,41 @@ console.log(one === one_string); // false. See below for explanation.
      - The argument object contains an array of the arguments used when the function was called (invoked).
      - This way you can simply use a function to find (for instance) the highest value in a list of numbers:
 **** Arguments are Passed by Value
+     
+#+BEGIN_SRC js
+  function myInc(a){
+      a = a+1;
+  }
+  var theInt = 3;
+
+  myInc(theInt);
+
+  console.log("theInt :" + theInt);
+#+END_SRC
 **** Objects are Passed by Reference
      
 #+BEGIN_SRC js
-  var aa={name:"Pter",
+
+  var aa={name:"Peter",
 	  age : "17"};
-  var theStr = "HelloWorld";
 
-  console.log("theStr : " + theStr);
-  console.log("theStr.toUpperCase() : " + theStr.toUpperCase());
-
-  function nameToUpper(v1){
-      console.log("v1.name : " + v1.name);
-      console.log("typeof(v1.name) : " + typeof v1.name);
-      v1.name = v1.name.toUpperCase();
-      console.log("v1.name : " + v1.name);
+  function nameToUpper(theObj){
+      //console.log("theObj.name : " + theObj.name);
+      //console.log("typeof(theObj.name) : " + typeof theObj.name);
+      theObj.name = theObj.name.toUpperCase();
+      //console.log("theObj.name : " + theObj.name);
   }
   nameToUpper(aa);
   console.log("aa.name : " + aa.name);
+
+  function myInc(a){
+      a = a+1;
+  }
+  var theInt = 3;
+
+  myInc(theInt);
+
+  console.log("theInt :" + theInt);
 
 #+END_SRC
 *** 10. 함수 심화
