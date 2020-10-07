@@ -495,12 +495,75 @@ myObj.myFunc2(); // "hi!"
       - substr(start, length)
 
 *** 13. BOM (Browser Object Mode)
+    * The Browser Object Model (BOM) allows JavaScript to "talk to" the browser.
+      
+**** Window Object
     * window.alert
     * window.console.log
     * window.open
+      - The open() method opens a new browser window,
+      - or a new tab, depending on your browser settings and the parameter values.
+      
+#+BEGIN_SRC js
+  <!doctype html>
+  <html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+      <meta charset="utf-8"> 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+      <button onclick="aa();"> Click Me!! </button>
+      <button onclick="bb();"> Click Me!! </button>
+
+      <script>
+	//https://offbyone.tistory.com/312
+	function aa(){
+	var popWin = window.open("", "popup window", "width=800, height=600");
+	popWin.document.write("<p> 새창에 표시될 내용입니다.</p>");
+	}
+	function bb(){
+	var popWin = window.open("./popup.html", "popup window", "width=800, height=600");
+	popWin.document.write("<p> popup.html 내용입니다.</p>");
+	}
+      </script>
+    </body>
+
+  </html>
+
+#+END_SRC
+    * close
+      
+#+BEGIN_SRC js
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="openWin()">Open "myWindow"</button>
+<button onclick="closeWin()">Close "myWindow"</button>
+
+<script>
+var myWindow;
+
+function openWin() {
+  myWindow = window.open("", "myWindow", "width=200,height=100");
+  myWindow.document.write("<p>This is 'myWindow'</p>");
+}
+
+function closeWin() {
+  myWindow.close();
+}
+</script>
+
+</body>
+</html>
+#+END_SRC
     * moveBy
     * resizeBy
     * window.onload
+
     * location.href
       
 **** location.href
@@ -582,23 +645,246 @@ function f4() {window.open("https://www.yahoo.com");}
 </html>
 #+END_SRC
 
-*** 14. DOM (Document Object Model)
-    1. document.getElementById
-    2. document.getElementsByClassName
-    3. document.getElementsByTagName
-    4. document.querySelector
-    5. document.querySelectorAll
-    6. document.createElement
-    7. document.createTextNode
-    8. document.body.appendchild
+**** advanced example
+     - chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+#+BEGIN_SRC html
+<!-- 
+parent.html
+https://usefulangle.com/post/4/javascript-communication-parent-child-window
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<style type="text/css">
 
-      
-**** getElementById
-**** getElementsByClassName
-**** getElementsByTagName
-**** [[https://www.w3schools.com/jsref/met_document_queryselector.asp][querySelector]]   
-**** [[https://www.w3schools.com/jsref/met_document_queryselectorall.asp][querySelectorAll]]  
-**** createElement && createTextNode && appendChild
+#open-child-window {
+	width: 300px;
+	display: block;
+	margin: 40px auto 0 auto;
+}
+
+#messages-container {
+	max-width: 600px;
+	margin: 40px auto 0 auto;
+	overflow: hidden;
+	display: none;
+}
+
+h6 {
+	margin: 0 0 20px 0;
+	text-align: center;
+}
+
+#message-to-outer {
+	width: 45%;
+	background-color: #f8f8f8;
+	padding: 5px;
+	box-sizing: border-box;
+	float: left;
+	margin: 0 10% 0 0;
+}
+
+#message-to-container {
+	height: 150px;
+}
+
+#message-to-container textarea {
+	height: 100px;
+	margin: 0 0 20px 0;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	resize: none;
+}
+
+#message-to-container button {
+	height: 30px;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+#message-from-outer {
+	width: 45%;
+	background-color: #e9e9e9;
+	padding: 5px;
+	box-sizing: border-box;
+	float: right;
+}
+
+#message-from-container {
+	height: 150px;
+	overflow: auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<button id="open-child-window">Open Child Window</button>
+
+<div id="messages-container">
+	<div id="message-to-outer">
+		<h6>Send Message to Child</h6>
+		<div id="message-to-container">
+			<textarea id="message"></textarea>
+			<button id="send-message-child">Send Message to Child</button>
+		</div>
+	</div>
+	<div id="message-from-outer">
+		<h6>Messages from Child</h6>
+		<div id="message-from-container"></div>
+	</div>
+</div>
+
+<script>
+
+// This will hold the handle of the child window
+var __CHILD_WINDOW_HANDLE = null;
+
+$("#open-child-window").on('click', function() {
+	__CHILD_WINDOW_HANDLE = window.open('child.html', '_blank', 'width=700,height=500,left=200,top=100');
+console.log("__CHILD_WINDOW_HANDLE :" + __CHILD_WINDOW_HANDLE);
+
+	$("#messages-container").show();
+	$("#open-child-window").hide();
+});
+
+$("#send-message-child").on('click', function() {
+	if($.trim($("#message").val()) != '') {
+		__CHILD_WINDOW_HANDLE.ProcessParentMessage($("#message").val());
+		$("#message").val('');
+	}
+});
+
+function ProcessChildMessage(message) {
+	$("#message-from-container").append('<div>' + message + '</div>');
+}
+
+</script>
+
+</body>
+</html>
+#+END_SRC
+
+#+BEGIN_SRC html
+<!--
+child.html
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<style type="text/css">
+
+#messages-container {
+	width: 600px;
+	margin: 40px auto 0 auto;
+	overflow: hidden;
+}
+
+h6 {
+	margin: 0 0 20px 0;
+	text-align: center;
+}
+
+#message-to-outer {
+	width: 45%;
+	background-color: #f8f8f8;
+	padding: 5px;
+	box-sizing: border-box;
+	float: left;
+	margin: 0 10% 0 0;
+}
+
+#message-to-container {
+	height: 150px;
+}
+
+#message-to-container textarea {
+	height: 100px;
+	margin: 0 0 20px 0;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	resize: none;
+}
+
+#message-to-container button {
+	height: 30px;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+#message-from-outer {
+	width: 45%;
+	background-color: #e9e9e9;
+	padding: 5px;
+	box-sizing: border-box;
+	float: right;
+}
+
+#message-from-container {
+	height: 150px;
+	overflow: auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="messages-container">
+	<div id="message-to-outer">
+		<h6>Send Message to Parent</h6>
+		<div id="message-to-container">
+			<textarea id="message"></textarea>
+			<button id="send-message-parent">Send Message to Parent</button>
+		</div>
+	</div>
+	<div id="message-from-outer">
+		<h6>Messages from Parent</h6>
+		<div id="message-from-container"></div>
+	</div>
+</div>
+
+<script>
+
+$("#send-message-parent").on('click', function() {
+	if($.trim($("#message").val()) != '') {
+		window.opener.ProcessChildMessage($("#message").val());
+		$("#message").val('');
+	}
+});
+
+function ProcessParentMessage(message) {
+	$("#message-from-container").append('<div>' + message + '</div>');
+}
+
+</script>
+
+</body>
+</html>
+
+#+END_SRC
+*** 14. DOM (Document Object Model)
+    1. document.createElement
+    2. document.createTextNode
+    3. document.body.appendchild
+    4. document.getElementById
+    5. document.getElementsByClassName
+    6. document.getElementsByTagName
+    7. document.querySelector
+    8. document.querySelectorAll
+
+**** [[https://www.w3schools.com/jsref/met_document_createtextnode.asp][createElement && createTextNode && appendChild]] 
 #+BEGIN_SRC html
 <!doctype html>
 <html>
@@ -649,6 +935,19 @@ function myFunction() {
 
 
 #+END_SRC
+**** [[https://www.w3schools.com/jsref/met_document_getelementbyid.asp][getElementById]]   
+     - The getElementById() method returns the element that has the ID attribute with the specified value.
+     - Returns null if no elements with the specified ID exists.
+**** [[https://www.w3schools.com/jsref/met_element_getelementsbyclassname.asp][getElementsByClassName]] 
+     - The getElementsByClassName() method returns a collection of an element's child elements with the specified class name, as a NodeList object.
+**** [[https://www.w3schools.com/jsref/met_element_getelementsbytagname.asp][getElementsByTagName]]  
+     - The getElementsByTagName() method returns a collection of an elements's child elements with the specified tag name, as a NodeList object.
+**** [[https://www.w3schools.com/jsref/met_document_queryselector.asp][querySelector]]   
+     - The querySelector() method returns the first element that matches
+     - a specified CSS selector(s) in the document.    
+**** [[https://www.w3schools.com/jsref/met_document_queryselectorall.asp][querySelectorAll]]  
+     - The querySelectorAll() method returns all elements in the document
+     - that matches a specified CSS selector(s), as a static NodeList object.    
       
 *** 15. event
     - mouse, button, form, webpage load, focus, 
