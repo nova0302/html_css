@@ -305,15 +305,30 @@ myObj.myFunc2(); // "hi!"
 
 ***** 생성자를 이용한 객체생성
  #+BEGIN_SRC js
-   function theCar(name, color, speed){
-       this.name    = name;
-       this.color  = color;
-       this.speed  = speed;
-       this.run    = function(){
-	   return this.speed + "flies!";
-       };
-   };
-
+    function Car(name, color, speed){
+	this.name    = name;
+	this.color  = color;
+	this.speed  = speed;
+	this.run    = function(){
+	    return this.speed + "runs!";
+	};
+	this.info = function(){
+	    console.log("Name : "  +  this.name);
+	    console.log("Color : " + this.color);
+	    console.log("Speed : " + this.speed);
+	};
+    }
+    var Sonata = new Car("Sonata", "silver", 230);
+    var Sorento = new Car("Sorento", "black", 210);
+    var Cars = [Sonata, Sorento];
+    for(var i=0; i < Cars.length; i++){
+	Cars[i].info();
+	//with(Cars[i]){
+	//	   console.log("Name : ",  name);
+	//	   console.log("Color : ", color);
+	//	   console.log("Speed : ", speed);
+	//}
+    }
  #+END_SRC
 
 **** [[https://www.hongkiat.com/blog/getters-setters-javascript/][getters && setters]]  
@@ -367,33 +382,58 @@ myObj.myFunc2(); // "hi!"
 
 ***** [[https://www.hongkiat.com/blog/getters-setters-javascript/][4. Protect data with getters and setters]]  
 
-      - 1. block scope
-      - 2. function scope
- #+BEGIN_SRC js
- function myobj(){
-   var fooVal = 'this is the value of foo';
-   return {
-       get foo() {
-           return fooVal;
-       },
-       set foo(val) {
-           fooVal = val
-       }
-   }
- }
- 
- fooVal = 'hello';
- // not going to affect our original fooVal
- 
- var obj = myobj();
- 
- console.log(obj.foo);
- // "this is the value of foo"
+      
+****** 1. block scope
+	
+#+BEGIN_SRC js
+  /* BLOCK SCOPE, leave the braces alone! */
+  {
+      let fooVal = 'this is the value of foo';
+      var obj = {
+	  get foo() {
+	      return fooVal;
+	  },
+	  set foo(val) {
+	      fooVal = val
+	  }
+      }
+  }
 
- #+END_SRC
+  fooVal = 'hello';
+  // not going to affect the fooVal inside the block
+
+  console.log(obj.foo);
+  // "this is the value of foo"
+
+#+END_SRC
+
+
+****** 2. function scope
+  #+BEGIN_SRC js
+    function myobj(){
+	var fooVal = 'this is the value of foo';
+	return {
+	    get foo() {
+		return fooVal;
+	    },
+	    set foo(val) {
+		fooVal = val
+	    }
+	}
+    }
+
+    fooVal = 'hello';
+    // not going to affect our original fooVal
+
+    var obj = myobj();
+
+    console.log(obj.foo);
+    // "this is the value of foo"
+
+  #+END_SRC
 ***** Wyh using Getters and Setters?
-      - It gives simpler syntax
-      - It allows equal syntax for properties and methods
+      - It gives *simpler syntax*
+      - It allows *equal syntax for properties and methods*
       - It can secure better data quality
       - It is useful for doing things behind-the-scenes
 

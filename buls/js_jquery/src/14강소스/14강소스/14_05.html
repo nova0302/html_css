@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Javascript</title>
+		<script>
+		
+			window.onload = function() {
+			
+				var str = "";
+				str += "<p id='jsTitle'> javascript & node.js </p>";
+				str += "<img id='logoImg', src='./img/logo.png',";
+				str += "width='170', height='67', tempData='logoImg'>";
+				
+				document.body.innerHTML = str;
+				
+				var titleNode = document.getElementById("jsTitle");
+				titleNode.parentNode.removeChild(titleNode);
+				
+				var logoNode = document.getElementById("logoImg");
+				logoNode.parentNode.removeChild(logoNode);
+			
+			};
+			
+		</script>
+	
+	</head>
+	
+	<body>
+		
+	</body>
+
+</html>
