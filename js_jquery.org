@@ -950,26 +950,66 @@ function myFunction() {
      - that matches a specified CSS selector(s), as a static NodeList object.    
       
 *** 15. event
-    - mouse, button, form, webpage load, focus, 
+    - mouse, button, form, *webpage load*, focus, 양식전송
     - xxx.onclick = function(){}
-      
 **** 이벤트 형식
       
 #+BEGIN_SRC js
 
-xxx.onclick = function(){//}
-      | |       |
-      | |       |---> event handler
-      | |-----------> event attribute(onclick)
-      |-------------> event name(click)
+xxx.onclick = function(){}
+      | |   |    |
+      | |   |    |---> event handler
+      | |   |--------> 이벤트 연결
+      | |-----------> event name(click)
+      |-------------> event attribute(onclick)
 
 #+END_SRC
 
 **** 이벤트 모델
-     - DOM level 0
+***** DOM level 0
        a. inline model
+       
+#+BEGIN_SRC html
+<html>
+
+<head>
+
+<script>
+function headerClick(){
+console.log("click");
+
+//이벤트 제거
+var ce = document.getElementById("cEvent");
+console.log(ce);
+ce.onclick = null;
+}
+</script>
+
+</head>
+
+<body>
+
+<style>
+#cEvent{
+width : 200px; height:100px;
+line-height:100px;
+text-align:center;
+font-size:1.2em;
+background-color:#00f000;
+color:#000FFF;
+font-weight:bolder;
+}
+</style>
+
+<div id="cEvent" onclick="headerClick();"> Click Event </div>
+
+</body>
+
+</html>
+#+END_SRC
        b. *basic model*
-     - DOM level 2
+       
+***** DOM level 2
        a. ms handler model
        b. *standard handler model*
        

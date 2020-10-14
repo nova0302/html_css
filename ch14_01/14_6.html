@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+  <head>
+    <script>
+      window.onload = function(){
+	  var str = "";
+	  str += "<p id='jsTitle'> javascript & node.js </p>";
+	  str += "<img id='logoImg' src='./img/sydney.jpg' width='800', height='600', userattribute='userAttrValue'> " ;
+	  document.body.innerHTML += str;
+
+	  var titleNode = document.getElementById("jsTitle");
+	  //titleNode.style.fontSize = "1.2em";
+	  titleNode.style.fontSize = "2em";
+	  titleNode.style.border = "1px solid #ff0000";
+
+	  var logoNode = document.getElementById("logoImg");
+	  logoNode.style.width = "400px";
+	  logoNode.style.height = "300px";
+      };
+
+      var fSizeArr = ['1em', '2em', '3em'];
+      var fSize = 0;
+
+      function aa(){
+      if(++fSize > 2) fSize = 0;
+      document.getElementById('jsTitle').style.fontSize = fSizeArr[fSize];
+      }
+    </script>
+    
+  </head>
+
+  <body>
+    <button onclick="aa();"> Click Me!! </button>
+
+  </body>
+</html>
+
+

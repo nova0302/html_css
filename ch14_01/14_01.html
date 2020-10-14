@@ -1,0 +1,77 @@
+
+
+<!doctype html>
+<html>
+
+  <head>
+    <script>
+      window.onload = function(){
+
+      var pNode = document.createElement("p");
+      var pText = document.createTextNode("This is p node!!!");
+      pNode.appendChild(pText);
+      document.body.appendChild(pNode);
+
+      var h1Node = document.createElement("h1");
+      var h1Text = document.createTextNode("This is h1 node!!!");
+
+      h1Node.appendChild(h1Text);
+      document.body.appendChild(h1Node);
+
+      var imgSydney = document.createElement("img");
+      imgSydney.src = "./img/sydney.jpg";
+      imgSydney.width = "400";
+      imgSydney.height = "300";
+      //imgCuba.id=  "Sydney";
+      document.body.appendChild(imgSydney);
+
+      var brNode = document.createElement("br");
+      document.body.appendChild(brNode);
+
+      var imgCuba = document.createElement("img");
+      imgCuba.setAttribute("src",  "./img/cuba.jpg"   ) ;
+      imgCuba.setAttribute("width",   400);
+      imgCuba.setAttribute("height",  300);
+      imgCuba.setAttribute("id",  "Cuba");
+      imgCuba.setAttribute("tempData", "logoImage") ;
+
+      document.body.appendChild(imgCuba);
+
+      var br1Node = document.createElement("br");
+      document.body.appendChild(br1Node);
+
+      var b1 = document.createElement('button');
+      var b1Text = document.createTextNode('button1');
+      b1.appendChild(b1Text);
+      document.body.appendChild(b1);
+
+      var b2 = document.createElement('button');
+      var b2Text = document.createTextNode('button2');
+      b2.appendChild(b2Text);
+      document.body.appendChild(b2);
+
+
+//      console.log(imgNode);
+      };
+      function removeImage(){
+      var cubaImage = document.getElementById('Cuba');
+      cubaImage.parentNode.removeChild(cubaImage)
+      }
+      function increaseCubaimage(){
+      var cubaImage = document.getElementById('Cuba');
+      cubaImage.style.width  = '800px';
+      cubaImage.style.height = '600px';
+      }
+    </script>
+    
+  </head>
+
+  <body>
+    <button onclick="removeImage();"> removeImage </button>
+    <button onclick="increaseCubaimage();">increaseCubaimage  </button>
+    <button onclick="document.getElementById('demo').innerHTML=Date();">update 날짜  </button>
+
+    <p id='demo'> </p>
+
+  </body>
+</html>
