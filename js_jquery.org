@@ -13,6 +13,8 @@
    3. DOM Manipulation
    4. Send/receive data without page refresh
 
+** [[https://www.w3schools.com/js/js_this.asp][this]]  
+
 ** JS
    - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
    - https://www.w3schools.com
