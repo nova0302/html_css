@@ -1081,3 +1081,4 @@ font-weight:bolder;
    - Array.find()
    - Array.findIndex()
    - Exponentiation (**) (EcmaScript 2016)
+** [[https://flaviocopes.com/javascript-automatic-semicolon-insertion/#:~:text=JavaScript%20semicolons%20are%20optional.,but%20many%20people%20prefer%20them.&text=Semicolons%20in%20JavaScript%20divide%20the,them%20always,%20no%20matter%20what.][semicolons in JavaScript]]  
