@@ -16,6 +16,8 @@
 ** [[https://www.w3schools.com/js/js_this.asp][this]]  
 ** [[https://flaviocopes.com/javascript-automatic-semicolon-insertion/#:~:text=JavaScript%20semicolons%20are%20optional.,but%20many%20people%20prefer%20them.&text=Semicolons%20in%20JavaScript%20divide%20the,them%20always,%20no%20matter%20what.][semicolons in JavaScript]]  
 ** [[https://medium.com/better-programming/javascript-how-backticks-work-de269e0fb8ba][backtick]] 
+** [[https://www.youtube.com/watch?v=PFmuCDHHpwk&t=3271s][oop in js "Mosh"]]  
+** [[https://www.geeksforgeeks.org/difference-between-var-and-let-in-javascript/#:~:text=var%20and%20let%20are%20both,program%20as%20compared%20to%20let.][Differences between var and let in JavaScript]]  
    
 ** external links
    
