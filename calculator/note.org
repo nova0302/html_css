@@ -1,0 +1,286 @@
+* CSS Summary
+** [[https://www.w3schools.com/css/css3_box-sizing.asp][box-sizing]]  
+   
+** [[https://www.w3schools.com/css/css_display_visibility.asp][display]]  
+
+** [[https://www.w3schools.com/cssref/css3_pr_justify-content.asp][justify-content]]  
+
+** [[https://www.w3schools.com/cssref/pr_dim_min-height.asp][min-height]]  
+
+** [[https://www.w3schools.com/cssref/pr_grid-template-columns.asp][grid-template-columns]]  
+
+** grid-template-rows
+
+** [[https://www.w3schools.com/cssref/pr_class_cursor.asp][cursor]]  
+
+** outline
+
+** grid-column
+
+** align-items
+
+** [[https://www.w3schools.com/cssref/css3_pr_flex-direction.asp][flex-direction]]  
+
+** [[https://www.w3schools.com/cssref/css3_pr_word-wrap.asp][word-wrap]]  
+
+** [[https://www.w3schools.com/cssref/css3_pr_word-break.asp][word-break]]  
+
+** flex
+
+** [[https://www.w3schools.com/cssref/pr_font_weight.asp][font-weight]]  
+
+** [[https://www.w3schools.com/css/css_pseudo_elements.asp][Pseudo-elements]] (::before, ::after) 
+   - A CSS pseudo-element is used to style specified parts of an element.
+   - For example, it can be used to:
+     - Style the first letter, or line, of an element
+     - Insert content before, or after, the content of an element
+
+** [[https://www.w3schools.com/css/css3_flexbox.asp][Flexbox]]  
+   - A Flexible Layout must have a parent element with the display property set to flex.
+   - Direct child elements(s) of the flexible container automatically becomes flexible items.
+
+** [[https://uid.gitbook.io/css-grid/css-grid-guide/repea-function][repeat() function]]  
+
+** [[https://uid.gitbook.io/css-grid/css-grid-guide/minmax-function][minmax() function]]  
+
+** [[https://uid.gitbook.io/css-grid/css-grid-guide/fr-unit][fr uint]]  
+
+** [[https://www.w3schools.com/cssref/func_linear-gradient.asp][linear-gradient]]  
+   - The linear-gradient() function sets a linear gradient as the background image.
+
+
+
+* HTML
+#+BEGIN_SRC html
+
+<!doctype html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title> Calculator </title>
+    <link rel="stylesheet" href="style.css">
+    <script src='script.js' defer> </script>
+  </head>
+
+  <body>
+    <div class='calculator-grid'>
+
+      <div class='output'>
+	<div data-previous-operand class='previous-operand'> </div>
+	<div data-current-operand class='current-operand'> </div>
+      </div>
+
+      <button data-all-clear class='span-two'>AC </button>
+      <button data-delete>DEL </button>
+      <button data-operation> ÷ </button>
+      <button data-number> 1 </button>
+      <button data-number> 2 </button>
+      <button data-number> 3 </button>
+      <button data-operation> * </button>
+      <button data-number> 4 </button>
+      <button data-number> 5 </button>
+      <button data-number> 6 </button>
+      <button data-operation> + </button>
+      <button data-number> 7 </button>
+      <button data-number> 8 </button>
+      <button data-number> 9 </button>
+      <button data-operation> - </button>
+      <button data-number> . </button>
+      <button data-number> 0 </button>
+      <button data-equals class='span-two'> = </button>
+
+    </div>
+
+  </body>
+
+</html>
+
+
+#+END_SRC
+* JS
+#+BEGIN_SRC js
+class Calculator{
+    constructor(previousOperandTextElement, currentOperandTextElement){
+	this.previousOperandTextElement = previousOperandTextElement
+	this.currentOperandTextElement = currentOperandTextElement
+	this.clear()
+    }
+    clear(){
+	this.currentOperand = ''
+	this.previousOperand = ''
+	this.operation = undefined
+    }
+    delete(){
+	this.currentOperand = this.currentOperand.toString().slice(0, -1)
+	
+    }
+    appendNumber(number){
+	if (number === '.' && this.currentOperand.includes('.')) return
+	this.currentOperand = this.currentOperand.toString() + number.toString()
+    }
+    chooseOperation(operation){
+	if (this.currentOperand === '') return
+	if (this.previousOperand !== '') {
+	    this.compute()
+	}
+	this.operation = operation
+	this.previousOperand = this.currentOperand
+	this.currentOperand = ''
+    }
+    compute(){
+	let computation
+	const prev = parseFloat(this.previousOperand)
+	const current = parseFloat(this.currentOperand)
+	if (isNaN(prev) || isNaN(current)) return
+	switch(this.operation){
+	case '+': computation = prev + current; break; 
+	case '-': computation = prev - current; break;
+	case '*': computation = prev * current; break;
+	case '÷': computation = prev / current; break;
+	default: return
+	}
+	
+	this.currentOperand = computation
+	this.operation = undefined
+	this.previousOperand = ''
+    }
+    getDisplayNumber(number){
+	const stringNumber = number.toString()
+	const integerDigits = parseFloat(stringNumber.split('.')[0])
+	const decimalDigits = stringNumber.split('.')[1]
+	let integerDisplay
+	if (isNaN(integerDigits)) {
+	    integerDisplay = ''
+	}else{
+	    integerDisplay = integerDigits.toLocaleString('en', {
+		maximumFractionDigits: 0
+	    })
+	}
+	if (decimalDigits != null) {
+	    return `${integerDisplay}.${decimalDigits}`
+	}else{
+	    return integerDisplay
+	}
+    }
+    updateDisplay(){
+	this.currentOperandTextElement.innerText =
+	    this.getDisplayNumber(this.currentOperand)
+	if(this.operation != null) {
+	    this.previousOperandTextElement.innerText =
+		`${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+	}else{
+	    this.previousOperandTextElement.innerText=''
+	}
+    }
+}
+
+const numberButtons = document.querySelectorAll('[data-number]')
+const operationButtons = document.querySelectorAll('[data-operation]')
+
+const equalsButton = document.querySelector('[data-equals]')
+
+const deleteButton = document.querySelector('[data-delete]')
+const allClearButton = document.querySelector('[data-all-clear]')
+
+const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+const currentOperandTextElement = document.querySelector('[data-current-operand]')
+
+const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', ()=>{
+	calculator.appendNumber(button.innerText)
+	calculator.updateDisplay()
+    })
+})
+
+operationButtons.forEach(button => {
+    button.addEventListener('click', ()=>{
+	calculator.chooseOperation(button.innerText)
+	calculator.updateDisplay()
+    })
+})
+
+equalsButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
+})
+
+allClearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
+})
+
+deleteButton.addEventListener('click', button => {
+    calculator.delete()
+    calculator.updateDisplay()
+})
+
+
+
+#+END_SRC
+* CSS
+#+BEGIN_SRC css
+
+//style.css
+*, *::before, *::after{
+    box-sizing: border-box;
+    font-weight: normal;
+}
+body{
+    padding:0;
+    margin:0;
+    background: linear-gradient(to right, #00AAFF, #00FF6C);
+}
+.calculator-grid{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows:minmax(120px, auto) repeat(5, 100px);
+}
+
+.calculator-grid > button{
+    cursor: pointer;
+    font-size:2rem;
+    border:1px solid white;
+    outline:none;
+    background-color: rgb(255,255, 255,.75);
+}
+
+
+.calculator-grid > button:hover{
+    background-color: rgb(255,255, 255,.9);
+}
+
+.span-two{
+    grid-column:span 2;
+}
+.output{
+    grid-column:1 / -1;
+    background-color: rgba(0,0,0,.75);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
+    padding:10px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+}
+
+.output .previous-operand{
+    color:rgba(255,255,255,.75);
+    font-size:1.5rem;
+}
+
+.output .current-operand{
+    color:white;
+    font-size:2.5rem;
+}
+
+#+END_SRC

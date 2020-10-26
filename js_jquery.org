@@ -14,6 +14,17 @@
    4. Send/receive data without page refresh
 
 ** [[https://www.w3schools.com/js/js_this.asp][this]]  
+** [[https://flaviocopes.com/javascript-automatic-semicolon-insertion/#:~:text=JavaScript%20semicolons%20are%20optional.,but%20many%20people%20prefer%20them.&text=Semicolons%20in%20JavaScript%20divide%20the,them%20always,%20no%20matter%20what.][semicolons in JavaScript]]  
+   
+** external links
+   
+*** HTML Elements
+   - <a href="https://www.w3schools.com">Visit W3Schools.com!</a>
+   - <img    src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">
+     
+*** Etc
+   - <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" rel="stylesheet">
+   - <script src="hello.js", type="text/javaScript"> </script>
 
 ** JS
    - The isNaN() function determines whether a value is an illegal number (Not-a-Number).
@@ -1081,4 +1092,3 @@ font-weight:bolder;
    - Array.find()
    - Array.findIndex()
    - Exponentiation (**) (EcmaScript 2016)
-** [[https://flaviocopes.com/javascript-automatic-semicolon-insertion/#:~:text=JavaScript%20semicolons%20are%20optional.,but%20many%20people%20prefer%20them.&text=Semicolons%20in%20JavaScript%20divide%20the,them%20always,%20no%20matter%20what.][semicolons in JavaScript]]  
