@@ -1036,6 +1036,33 @@ font-weight:bolder;
       
 *** Misc
     
+**** [[https://www.javascripttutorial.net/javascript-closure/][Closures]]  
+     
+#+begin_src javascript
+//for (var index = 1; index < 8; index++) {
+//    setTimeout(
+//	function(){
+//	    console.log(`after ${index*2} second(s): ${index}`)},
+//	index*1000)
+//}
+
+//for (var index = 1; index < 8; index++) {
+//    (function(index) {
+//	 setTimeout(
+//	     function(){
+//		 console.log(`after ${index*2} second(s): ${index}`)},
+//	     index*1000)}
+//    )(index)
+//}
+
+for (let index = 1; index < 8; index++) {
+    setTimeout(
+	function(){
+	    console.log(`after ${index} second(s): ${index}`)},
+	index*1000)
+}
+#+end_src
+
 **** [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number][Number]]  
     
 **** [[https://www.hongkiat.com/blog/useful-javascript-statements/][4 Useful JavaScript Statements you should know]] 
